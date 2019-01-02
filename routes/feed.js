@@ -17,7 +17,7 @@ router.post(
       .trim()
       .isLength({ min: 5 })
   ],
-  feedController.postPost
+  feedController.createPost
 );
 
 router.get("/post/:postId", feedController.getPost);
