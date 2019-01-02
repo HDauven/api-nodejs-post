@@ -1,5 +1,7 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 const feedRoutes = require("./routes/feed");
 
@@ -19,4 +21,11 @@ app.use((req, res, next) => {
 
 app.use("/feed", feedRoutes);
 
-app.listen(8080);
+const { DB_HOST, DB_USER, DB_PASS } = process.env;
+const MONGODB_URI = `mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/network`;
+mongoose
+  .connect(MONGODB_URI)
+  .then(result => {
+    app.listen(8080);
+  })
+  .catch(err => console.log(err));
