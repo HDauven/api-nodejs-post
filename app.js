@@ -23,6 +23,13 @@ app.use((req, res, next) => {
 
 app.use("/feed", feedRoutes);
 
+app.use((error, req, res, next) => {
+  console.log(error);
+  const status = error.statusCode || 500;
+  const message = error.message;
+  res.status(status).json({ message });
+});
+
 const { DB_HOST, DB_USER, DB_PASS } = process.env;
 const MONGODB_URI = `mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/messages`;
 mongoose
