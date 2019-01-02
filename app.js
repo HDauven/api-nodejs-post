@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 app.use("/feed", feedRoutes);
 
 const { DB_HOST, DB_USER, DB_PASS } = process.env;
-const MONGODB_URI = `mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/network`;
+const MONGODB_URI = `mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/messages`;
 mongoose
   .connect(MONGODB_URI)
   .then(result => {
